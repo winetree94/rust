@@ -1,6 +1,5 @@
-workspace = { members = ["target/debug/closer"] }
 [package]
-name = "minigrep"
+name = "closer"
 version = "0.1.0"
 edition = "2021"
 
