@@ -79,19 +79,7 @@ impl TodoApp {
 }
 
 fn main() -> Result<(), std::io::Error> {
-    println!("Hello, winetree94 todo");
     let mut app = TodoApp::new();
-
     app.start()?;
-
-    // let todo1 = Todo::new(String::from("Buy milk"), Some(String::from("Groceries")));
-    // app.add_todo(todo1);
-
-    // let mut input = String::new();
-    // std::io::stdin().read_line(&mut input).unwrap();
-
-    // app.todos.iter().for_each(|todo| {
-    //     println!("todo: {:?}", todo);
-    // });
     Ok(())
 }
