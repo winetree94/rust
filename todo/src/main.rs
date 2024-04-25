@@ -26,22 +26,20 @@ impl TodoApp {
 
     fn start(&mut self) -> Result<(), std::io::Error> {
         loop {
+            println!("---------------------");
             println!("1. Add todo");
             println!("2. List todos");
             println!("3. Mark todo as completed");
             println!("4. Exit");
+            println!("---------------------");
             let mut input = String::new();
             std::io::stdin().read_line(&mut input)?;
 
             let _ = match input.trim().parse() {
                 Ok(1) => self.add_todo_prompt(),
                 Ok(2) => self.list_todo_prompt(),
-                Ok(3) => {
-                    Ok(())
-                }
-                Ok(4) => {
-                    Ok(())
-                }
+                Ok(3) => Ok(()),
+                Ok(4) => Ok(()),
                 _ => {
                     println!("Invalid input, try again.");
                     Ok(())
