@@ -4,9 +4,7 @@ use crossterm::{
     ExecutableCommand,
 };
 use ratatui::{
-    backend::Backend,
-    prelude::{CrosstermBackend, Stylize, Terminal},
-    widgets::Paragraph,
+    backend::Backend, layout::Rect, prelude::{CrosstermBackend, Stylize, Terminal}, widgets::{Block, Borders, Paragraph}
 };
 use std::{
     fs::File,
@@ -32,16 +30,21 @@ fn main() -> Result<()> {
     Ok(())
 }
 
+fn startup() -> Result<()> {
+    crossterm::terminal::enable_raw_mode()?;
+    crossterm::execute!(std::io::stdout(), crossterm::terminal::EnterAlternateScreen)?;
+    Ok(())
+}
+
 fn render<B: Backend>(terminal: &mut Terminal<B>, lines: &mut Vec<String>) -> Result<()> {
     loop {
         terminal.draw(|frame| {
-            let area = frame.size();
+            lines.iter().enumerate().for_each(|(index, line)| {
+                let area = frame.size();
+                // let area = Rect::new(0, index as u16 * 2, frame.size().width, 1);
 
-            lines.iter().for_each(|line| {
                 frame.render_widget(
-                    Paragraph::new(format!("{line}"))
-                        .white()
-                        .on_blue(),
+                    Paragraph::new(format!("{line}")).block(Block::new().borders(Borders::ALL)),
                     area,
                 );
             });
