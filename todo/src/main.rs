@@ -8,11 +8,11 @@ pub struct Todo {
 }
 
 impl Todo {
-    fn new(name: String, category: Option<String>) -> Todo {
+    fn new(name: String, category: Option<String>, completed: bool) -> Todo {
         Todo {
             name,
             category,
-            completed: false,
+            completed,
         }
     }
 }
@@ -23,20 +23,41 @@ pub struct TodoApp {
 
 impl TodoApp {
     fn new() -> TodoApp {
+        let mut todos = vec![];
         match File::open("db.txt") {
             Ok(mut file) => {
                 let mut contents = String::new();
-                file.read_to_string(&mut contents).expect("Failed to read file");
-                contents.lines().enumerate().for_each(|(index, line)| {
-                    line.split(",");
-                    println!("{index} {}", line);
+                file.read_to_string(&mut contents)
+                    .expect("Failed to read file");
+                contents.lines().for_each(|line| {
+                    let words: Vec<&str> =
+                        line.split("|").collect();
+                    if words.len() != 5 {
+                        return;
+                    }
+                    let name = words[1].to_string();
+                    let category = if words[2].is_empty() {
+                        None
+                    } else {
+                        Some(words[2].to_string())
+                    };
+                    let completed = match words[3].parse() {
+                        Ok(completed) => completed,
+                        Err(_) => false,
+                    };
+                    let todo = Todo::new(
+                        name,
+                        category,
+                        completed,
+                    );
+                    todos.push(todo);
                 });
             }
             Err(error) => {
                 println!("Error: {}", error);
             }
         }
-        TodoApp { todos: vec![] }
+        TodoApp { todos }
     }
 
     fn start(&mut self) -> Result<(), std::io::Error> {
@@ -53,9 +74,7 @@ impl TodoApp {
             let _ = match input.trim().parse() {
                 Ok(1) => self.add_todo_prompt(),
                 Ok(2) => self.list_todo_prompt(),
-                Ok(3) => {
-                    self.list_todo_prompt()
-                }
+                Ok(3) => self.list_todo_prompt(),
                 Ok(4) => break,
                 _ => {
                     println!("Invalid input, try again.");
@@ -71,7 +90,7 @@ impl TodoApp {
         println!("Enter the name of the todo:");
         let mut input = String::new();
         std::io::stdin().read_line(&mut input).unwrap();
-        let todo = Todo::new(input.trim().to_string(), None);
+        let todo = Todo::new(input.trim().to_string(), None, false);
         self.add_todo(todo);
         println!("Todo added successfully");
         println!("---------------------");
