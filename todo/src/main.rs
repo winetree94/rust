@@ -1,3 +1,5 @@
+use std::{fs::File, io::Read};
+
 #[derive(Debug)]
 pub struct Todo {
     pub name: String,
@@ -21,6 +23,19 @@ pub struct TodoApp {
 
 impl TodoApp {
     fn new() -> TodoApp {
+        match File::open("db.txt") {
+            Ok(mut file) => {
+                let mut contents = String::new();
+                file.read_to_string(&mut contents).expect("Failed to read file");
+                contents.lines().enumerate().for_each(|(index, line)| {
+                    line.split(",");
+                    println!("{index} {}", line);
+                });
+            }
+            Err(error) => {
+                println!("Error: {}", error);
+            }
+        }
         TodoApp { todos: vec![] }
     }
 
@@ -38,14 +53,17 @@ impl TodoApp {
             let _ = match input.trim().parse() {
                 Ok(1) => self.add_todo_prompt(),
                 Ok(2) => self.list_todo_prompt(),
-                Ok(3) => Ok(()),
-                Ok(4) => Ok(()),
+                Ok(3) => {
+                    self.list_todo_prompt()
+                }
+                Ok(4) => break,
                 _ => {
                     println!("Invalid input, try again.");
                     Ok(())
                 }
             };
         }
+        Ok(())
     }
 
     fn add_todo_prompt(&mut self) -> Result<(), std::io::Error> {
