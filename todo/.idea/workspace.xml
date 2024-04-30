@@ -8,15 +8,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="61a1b404-36f1-4677-b04b-5246e5b49158" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/restaurant/Cargo.toml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/restaurant/src/lib.rs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/mytodo/mod.rs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../package/src/main.rs" beforeDir="false" afterPath="$PROJECT_DIR$/../package/src/main.rs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Cargo.lock" beforeDir="false" afterPath="$PROJECT_DIR$/Cargo.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Cargo.toml" beforeDir="false" afterPath="$PROJECT_DIR$/Cargo.toml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib.rs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.rs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/todo/todo.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/mytodo/todo.rs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/mytodo/parser.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/mytodo/mod.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/mytodo/mod.rs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -116,12 +110,23 @@
       <option name="presentableId" value="Default" />
       <updated>1714123324226</updated>
       <workItem from="1714123325383" duration="2545000" />
-      <workItem from="1714444658799" duration="2907000" />
+      <workItem from="1714444658799" duration="4341000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
