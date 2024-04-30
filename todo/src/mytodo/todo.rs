@@ -6,11 +6,11 @@ pub struct Todo {
 }
 
 impl Todo {
-    pub fn new(name: String, category: Option<String>) -> Todo {
+    pub fn new(name: String, category: Option<String>, completed: bool) -> Todo {
         Todo {
             name,
             category,
-            completed: false,
+            completed,
         }
     }
 }

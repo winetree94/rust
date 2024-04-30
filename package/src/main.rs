@@ -1,6 +1,6 @@
 mod mytodo;
 
-pub use mytodo::{item, list};
+use mytodo::{item, list};
 
 fn main() {
     println!("Hello, world!");

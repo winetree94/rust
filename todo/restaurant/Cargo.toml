@@ -1,7 +1,5 @@
-workspace = { members = ["restaurant"] }
-
 [package]
-name = "todo"
+name = "restaurant"
 version = "0.1.0"
 edition = "2021"
 

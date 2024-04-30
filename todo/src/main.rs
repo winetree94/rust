@@ -1,24 +1,11 @@
 use std::{fs::File, io::Read};
 
-#[derive(Debug)]
-pub struct Todo {
-    pub name: String,
-    pub category: Option<String>,
-    pub completed: bool,
-}
+mod mytodo;
 
-impl Todo {
-    fn new(name: String, category: Option<String>, completed: bool) -> Todo {
-        Todo {
-            name,
-            category,
-            completed,
-        }
-    }
-}
+use mytodo::todo;
 
 pub struct TodoApp {
-    pub todos: Vec<Todo>,
+    pub todos: Vec<todo::Todo>,
 }
 
 impl TodoApp {
@@ -29,6 +16,7 @@ impl TodoApp {
                 let mut contents = String::new();
                 file.read_to_string(&mut contents)
                     .expect("Failed to read file");
+
                 contents.lines().for_each(|line| {
                     let words: Vec<&str> =
                         line.split("|").collect();
@@ -41,11 +29,8 @@ impl TodoApp {
                     } else {
                         Some(words[2].to_string())
                     };
-                    let completed = match words[3].parse() {
-                        Ok(completed) => completed,
-                        Err(_) => false,
-                    };
-                    let todo = Todo::new(
+                    let completed = words[3].parse().unwrap_or_else(|_| false);
+                    let todo = todo::Todo::new(
                         name,
                         category,
                         completed,
@@ -63,9 +48,9 @@ impl TodoApp {
     fn start(&mut self) -> Result<(), std::io::Error> {
         loop {
             println!("---------------------");
-            println!("1. Add todo");
+            println!("1. Add mytodo");
             println!("2. List todos");
-            println!("3. Mark todo as completed");
+            println!("3. Mark mytodo as completed");
             println!("4. Exit");
             println!("---------------------");
             let mut input = String::new();
@@ -87,10 +72,10 @@ impl TodoApp {
 
     fn add_todo_prompt(&mut self) -> Result<(), std::io::Error> {
         println!("---------------------");
-        println!("Enter the name of the todo:");
+        println!("Enter the name of the mytodo:");
         let mut input = String::new();
         std::io::stdin().read_line(&mut input).unwrap();
-        let todo = Todo::new(input.trim().to_string(), None, false);
+        let todo = todo::Todo::new(input.trim().to_string(), None, false);
         self.add_todo(todo);
         println!("Todo added successfully");
         println!("---------------------");
@@ -108,7 +93,7 @@ impl TodoApp {
         Ok(())
     }
 
-    fn add_todo(&mut self, todo: Todo) {
+    fn add_todo(&mut self, todo: todo::Todo) {
         self.todos.push(todo);
     }
 }
