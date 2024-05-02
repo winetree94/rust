@@ -1,4 +1,4 @@
-use std::{fs::File, io::Read};
+use std::fs::File;
 
 mod mytodo;
 
@@ -12,16 +12,14 @@ impl TodoApp {
     fn new() -> TodoApp {
         let mut todos = vec![];
         match File::open("db.txt") {
-            Ok(file) => {
-                match mytodo::parser::parse_database(file) {
-                    Ok(parsed_todos) => {
-                        todos = parsed_todos;
-                    }
-                    Err(error) => {
-                        println!("Error: {}", error);
-                    }
+            Ok(file) => match mytodo::parser::parse_database(file) {
+                Ok(parsed_todos) => {
+                    todos = parsed_todos;
                 }
-            }
+                Err(error) => {
+                    println!("Error: {}", error);
+                }
+            },
             Err(error) => {
                 println!("Error: {}", error);
             }
