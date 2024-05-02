@@ -2,9 +2,8 @@ use std::fs::File;
 use std::io::{Error, Read};
 
 use super::todo;
-use todo::Todo;
 
-pub fn parse_database(mut file: File) -> Result<Vec<Todo>, Error> {
+pub fn parse_database(mut file: File) -> Result<Vec<todo::Todo>, Error> {
     let mut contents = String::new();
     file.read_to_string(&mut contents)?;
 
@@ -25,7 +24,7 @@ pub fn parse_database(mut file: File) -> Result<Vec<Todo>, Error> {
             };
 
             let completed = words[3].parse().unwrap_or_else(|_| false);
-            Some(Todo::new(name, category, completed))
+            Some(todo::Todo::new(name, category, completed))
         })
         .collect();
 
