@@ -12,31 +12,15 @@ impl TodoApp {
     fn new() -> TodoApp {
         let mut todos = vec![];
         match File::open("db.txt") {
-            Ok(mut file) => {
-                let mut contents = String::new();
-                file.read_to_string(&mut contents)
-                    .expect("Failed to read file");
-
-                contents.lines().for_each(|line| {
-                    let words: Vec<&str> =
-                        line.split("|").collect();
-                    if words.len() != 5 {
-                        return;
+            Ok(file) => {
+                match mytodo::parser::parse_database(file) {
+                    Ok(parsed_todos) => {
+                        todos = parsed_todos;
                     }
-                    let name = words[1].to_string();
-                    let category = if words[2].is_empty() {
-                        None
-                    } else {
-                        Some(words[2].to_string())
-                    };
-                    let completed = words[3].parse().unwrap_or_else(|_| false);
-                    let todo = todo::Todo::new(
-                        name,
-                        category,
-                        completed,
-                    );
-                    todos.push(todo);
-                });
+                    Err(error) => {
+                        println!("Error: {}", error);
+                    }
+                }
             }
             Err(error) => {
                 println!("Error: {}", error);
