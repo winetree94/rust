@@ -8,9 +8,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="61a1b404-36f1-4677-b04b-5246e5b49158" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/app.rs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.rs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/mytodo/parser.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/mytodo/parser.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Cargo.toml" beforeDir="false" afterPath="$PROJECT_DIR$/Cargo.toml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/bin/main.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/mytodo/mod.rs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/mytodo/parser.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/parser.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/mytodo/todo.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/todo.rs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -62,6 +67,11 @@
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/bin" />
+    </key>
+  </component>
   <component name="RunManager" selected="Cargo.Run todo">
     <configuration name="Run todo" type="CargoCommandRunConfiguration" factoryName="Cargo Command">
       <option name="command" value="run --package todo --bin todo" />
@@ -112,6 +122,7 @@
       <workItem from="1714123325383" duration="2545000" />
       <workItem from="1714444658799" duration="8536000" />
       <workItem from="1714617710685" duration="190000" />
+      <workItem from="1714705985953" duration="1499000" />
     </task>
     <servers />
   </component>

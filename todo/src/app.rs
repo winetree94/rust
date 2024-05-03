@@ -1,18 +1,18 @@
+pub mod todo;
+pub mod parser;
+
 use std::fs::File;
-
-mod mytodo;
-
-use mytodo::todo;
+use crate::app::todo::Todo;
 
 pub struct TodoApp {
-    pub todos: Vec<todo::Todo>,
+    pub todos: Vec<Todo>,
 }
 
 impl TodoApp {
-    fn new() -> TodoApp {
+    pub fn new() -> TodoApp {
         let mut todos = vec![];
         match File::open("db.txt") {
-            Ok(file) => match mytodo::parser::parse_database(file) {
+            Ok(file) => match parser::parse_database(file) {
                 Ok(parsed_todos) => {
                     todos = parsed_todos;
                 }
@@ -27,12 +27,12 @@ impl TodoApp {
         TodoApp { todos }
     }
 
-    fn start(&mut self) -> Result<(), std::io::Error> {
+    pub fn start(&mut self) -> Result<(), std::io::Error> {
         loop {
             println!("---------------------");
-            println!("1. Add mytodo");
+            println!("1. Add app");
             println!("2. List todos");
-            println!("3. Mark mytodo as completed");
+            println!("3. Mark app as completed");
             println!("4. Exit");
             println!("---------------------");
             let mut input = String::new();
@@ -52,19 +52,19 @@ impl TodoApp {
         Ok(())
     }
 
-    fn add_todo_prompt(&mut self) -> Result<(), std::io::Error> {
+    pub fn add_todo_prompt(&mut self) -> Result<(), std::io::Error> {
         println!("---------------------");
-        println!("Enter the name of the mytodo:");
+        println!("Enter the name of the app:");
         let mut input = String::new();
         std::io::stdin().read_line(&mut input).unwrap();
-        let todo = todo::Todo::new(input.trim().to_string(), None, false);
+        let todo = Todo::new(input.trim().to_string(), None, false);
         self.add_todo(todo);
         println!("Todo added successfully");
         println!("---------------------");
         Ok(())
     }
 
-    fn list_todo_prompt(&mut self) -> Result<(), std::io::Error> {
+    pub fn list_todo_prompt(&mut self) -> Result<(), std::io::Error> {
         println!("---------------------");
         self.todos.iter().enumerate().for_each(|(index, todo)| {
             println!("{index}: Name: {}", todo.name);
@@ -75,13 +75,8 @@ impl TodoApp {
         Ok(())
     }
 
-    fn add_todo(&mut self, todo: todo::Todo) {
+    pub fn add_todo(&mut self, todo: Todo) {
         self.todos.push(todo);
     }
 }
 
-fn main() -> Result<(), std::io::Error> {
-    let mut app = TodoApp::new();
-    app.start()?;
-    Ok(())
-}
